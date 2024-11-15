@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="st.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+
+    <div class="logo" style="margin-left: 20px; margin-top:40px; font-size: 2.8rem;">Code <span style="color: #669bbc;">Quiz</span></div>
+
+    <ul class="menu">
+      <li id="statistiqueBtn"><i class="fa-solid fa-chart-line"></i> Statistiques</li>
+      <li id="voirQuiz"><i class="fa-solid fa-list"></i> Voir les Quiz</li>
+      <li id="AddQuiz"><i class="fa-solid fa-plus-circle"></i> Ajouter un Quiz</li>
+      <li id="home"><i class="fa-solid fa-sign-out-alt"></i> Déconnexion</li>
+    </ul>
+    </aside>
+
+    <!-- Contenu principal -->
+     <div class="main">
+        <div class="title">
+            <h1>Tableau de Bord</h1>
+            <p>Bienvenue <span>M. Administrateur</span></p>
+        </div>
+
+        <main id="content-contrainer">
+     
+            <!-- ---------------------------------------- form quiz card to add -->
+                <!-- <form id="addQuizForm"> -->
+                    <div class="addQuiz-form">
+                        <div class="input-container">
+                        <label for="quiz-Title">Titre de Quiz</label>
+                        <input type="text" id="quiz-Title"  placeholder="Entrez le titre du quiz"  required>
+                        </div>
+                        
+                        <div class="input-container">
+                        <label for="quizDifficulty">Difficulté</label>
+                        <input type="text" id="quizDifficulty"  placeholder="Facile, Moyenne, Difficile" required>
+                        </div>
+                        
+                        <div class="input-container">
+                        <label for="quizQuestions">Nombre de Questions</label>
+                        <input type="number" id="quizQuestions" placeholder="Entrez le nombre de questions" required>
+                        </div>
+                        
+                        <div class="input-container">
+                        <label for="quizDuration">Durée</label>
+                        <input type="number" id="quizDuration" placeholder="Durée en secondes" required>
+                        </div>
+            
+                        <div class="input-container">
+                        <label for="quizCategory">Catégorie</label>
+                        <input type="text" id="quizCategory" placeholder="Entrez la catégorie" required>
+                        </div>
+             
+                        <div class="button">
+                        <button type="submit" id="addQuizBtn">Ajouter le Quiz</button>
+                        </div>
+                    
+                    </div>
+                    <!-- -------------------- Box model to add question -->
+                    <div class="endQuizBoxModul" id="displayBoxModul">
+                        <h2>Le Quiz est ajouté avec succès !</h2>
+                        <div class="button">
+                          <button onclick="PassToAddQuestion()">Ajouter les Questions</button>
+                          <button onclick="backDashbord()">Retour au Dashbord</button>
+                        </div>
+                    </div>
+
+                <!-- </form> -->
+                 <!-- --------------------------------------- From questions -->
+        <div class="quiz-form-container" id="questionsForm">
+                <div class="input-container">
+                    <label for="questionText">Question:</label>
+                    <input type="text" id="questionText" placeholder="Entrez la question">
+                </div>
+
+                <div class="input-container">
+                    <label for="quizType">Type de Question:</label>
+                    <select id="quizType" onchange="ChoiceQuestionType()">
+                      <option  value="mcq">Choix Multiple</option>
+                      <option  value="boolean">Vrai / Faux</option>
+                      <option  value="text">Texte</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                      <!-- Options pour MCQ -->
+                      <div id="mcqOptions">
+                        <label>Options:</label>
+                        <input type="text" id="option1" placeholder="Option 1">
+                        <input type="text" id="option2" placeholder="Option 2">
+                        <input type="text" id="option3" placeholder="Option 3">
+                        <input type="text" id="option4" placeholder="Option 4">
+                      </div>
+                        <!-- Options pour Boolean -->
+                    <div id="booleanOptions" style="display: none;">
+                        <label>Réponse (Vrai ou Faux):</label>
+                        <select id="booleanAnswer">
+                          <option value="vrai">Vrai</option>
+                          <option value="faux">Faux</option>
+                        </select>
+                      </div>
+                         <!-- Correct Answer for Text -->
+                    <div id="textAnswer" style="display: none;">
+                        <label>Réponse correcte:</label>
+                        <input type="text" id="correctTextAnswer" placeholder="Entrez la réponse correcte">
+                      </div>
+                </div>
+
+                <div class="input-container">
+                    <label for="explanation">Explication:</label>
+                    <input type="text" id="explanation" placeholder="Explication de la réponse">
+                </div>
+
+                <div class="button">
+                    <button onclick="addQuestion()" id="addQuestionBtn">Ajouter la Question</button>
+                </div>
+                  
+                
+        </div>
+            
+                
+                            <section class="statistiques" id="displayStatistique">
+                            <div class="stat-card">
+                                <p>Nombre total de participants</p>
+                                <h3>8</h3>
+                                <span class="stat-change positive">+5%</span>
+                            </div>
+                            <div class="stat-card">
+                                <p>Score moyen</p>
+                                <h3>75%</h3>
+                                <span class="stat-change negative">-2%</span>
+                            </div>
+                            <div class="stat-card">
+                                <p>Temps moyen</p>
+                                <h3>1:30</h3>
+                            </div>
+                            </section>
+                
+                            <section class="quiz-management" id="displayQuizManagement">
+                            <h2>Gestion des Quiz</h2>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Nom du Quiz</th>
+                                    <th>Participants</th>
+                                    <th>Taux de réussite</th>
+                                    <th>Questions</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>HTML</td>
+                                    <td>5</td>
+                                    <td>90%</td>
+                                    <td>5</td>
+                                    <td>
+                                    <button class="btn delete-btn">Supprimer</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>CSS</td>
+                                    <td>2</td>
+                                    <td>75%</td>
+                                    <td>5</td>
+                                    <td>
+                                    <button class="btn delete-btn">Supprimer</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>JavaScript</td>
+                                    <td>1</td>
+                                    <td>50%</td>
+                                    <td>5</td>
+                                    <td>
+                                    <button class="btn delete-btn">Supprimer</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </section>
+                            <div class="main-container">
+                            </div>
+            
+                </main>
+     </div>
+   
+  </div>
+  <script src="quiz.js"></script>
+  <script>
+    var statistiqueBtn = document.getElementById('statistiqueBtn');
+    var addQuiz = document.getElementById('AddQuiz');
+    var statistique = document.getElementById('displayStatistique');
+    var quizManagement = document.getElementById('displayQuizManagement');
+    var addQuizForm = document.querySelector('.addQuiz-form');
+    var voirQuiz = document.getElementById('voirQuiz');
+    var boxModul = document.getElementById('displayBoxModul');
+    var addQuizBtn = document.getElementById('addQuizBtn');
+    var container = document.querySelector('.main-container'); 
+    var dashboardMainContainer = document.getElementById('content-contrainer');
+    var questionsForm = document.getElementById('questionsForm');
+        container.style.display = 'none';
+        addQuizForm.style.display = 'none';
+        boxModul.style.display = 'none';
+
+    statistiqueBtn.addEventListener('click', ()=>{
+      statistique.style.display = 'flex';
+      quizManagement.style.display = 'block';
+      addQuizForm.style.display = 'none';
+      container.style.display = 'none';
+      questionsForm.style.display = 'none';
+       
+    })
+
+ 
+   addQuiz.addEventListener('click', ()=>{
+    statistique.style.display = 'none';
+    quizManagement.style.display = 'none';
+    container.style.display = 'none';
+    addQuizForm.style.display = 'block';
+    questionsForm.style.display = 'none';
+    
+   })
+
+
+   voirQuiz.addEventListener('click', ()=>{
+    statistique.style.display = 'none';
+    quizManagement.style.display = 'none';
+    addQuizForm.style.display = 'none'
+    container.style.display = 'flex';
+    container.style.gap = '20px';
+    container.style.flexWrap = 'wrap';
+    container.style.justifyContent = 'center'; 
+    questionsForm.style.display = 'none';
+    
+   })
+// ------------------------------------------------- back to home
+   var home = document.getElementById('home');
+    home.addEventListener('click', ()=>{
+    window.location.href = 'index.html';
+  })
+  
+
+    let buttonAddQuiz = document.getElementById('addQuizBtn');
+
+    buttonAddQuiz.addEventListener('click', () => {
+        let quizTitle = document.getElementById('quiz-Title').value.trim();
+        let quizDifficulty = document.getElementById('quizDifficulty').value.trim();
+        let quizQuestionsCount = parseInt(document.getElementById('quizQuestions').value);
+        let quizDuration = parseInt(document.getElementById('quizDuration').value);
+        let quizCategory = document.getElementById('quizCategory').value.trim();
+
+        let newCardQuiz = {
+            title: quizTitle,
+            difficulty: quizDifficulty,
+            questionsCount: quizQuestionsCount,
+            duration: quizDuration,
+            category: quizCategory
+        };
+
+        let ArrayQuizCards = JSON.parse(localStorage.getItem('newCardsQuiz'));
+
+        if (!Array.isArray(ArrayQuizCards)) {
+            ArrayQuizCards = [];
+        }
+
+        ArrayQuizCards.push(newCardQuiz);
+        localStorage.setItem('newCardsQuiz', JSON.stringify(ArrayQuizCards));
+        addQuizForm.style.display = 'none';
+        dashboardMainContainer.style.alignItems = 'center';
+        boxModul.style.display = 'block';
+        boxModul.style.width = '100%';
+
+    });
+    
+   function PassToAddQuestion(){
+        boxModul.style.display = 'none';
+        questionsForm.style.display = 'block';
+    }
+
+
+   // ---------------------------------------- show quiz cards in dashboard
+   let quizCardsInfoJs = JSON.parse(localStorage.getItem('quizCardsInfo'));
+         
+         for (let card in quizCardsInfoJs) {
+         let info = quizCardsInfoJs[card];
+         
+         let newCard = document.createElement('div');
+         newCard.classList.add('quiz-card');
+         
+         newCard.innerHTML = `
+             <img src="/images/img.png" alt="">
+             <h3>${info.title}</h3>
+             <p>${info.numberOfQuestions} questions - ${info.duration} secondes</p>
+             <p class="level">Difficulté : <span id="${info.difficulty}">${info.difficulty}</span></p>
+             <button class="startBtn deleteQuiz" data-category="${info.category}">Supprimer</button>
+         `;
+          container.appendChild(newCard);
+        }
+   
+        //  ------------------------------------------------------------------- to show new cart Quiz
+         let newCardsQuiz = JSON.parse(localStorage.getItem('newCardsQuiz'));
+         
+         for (let card in newCardsQuiz) {
+            let info = newCardsQuiz[card];
+            
+            let newCard = document.createElement('div');
+            newCard.classList.add('quiz-card');
+            
+            newCard.innerHTML = `
+                <img src="/images/img.png" alt="">
+                <h3>${info.title}</h3>
+                <p>${info.questionsCount} questions - ${info.duration} secondes</p>
+                <p class="level">Difficulté : <span id="${info.difficulty}">${info.difficulty}</span></p>
+                <button class="startBtn deleteQuiz" data-category="${info.category}">Supprimer</button>
+            `;
+            container.appendChild(newCard);
+     
+         }
+function ChoiceQuestionType() {
+  
+        let quizType = document.getElementById('quizType').value;
+        let mcqType = document.getElementById('mcqOptions');
+        let boolean = document.getElementById('booleanOptions');
+        let textType = document.getElementById('textAnswer');
+        
+        if( quizType === 'mcq'){
+            mcqType.style.display = 'block';
+            boolean.style.display = 'none';
+            textType.style.display = 'none';
+        }
+        else if(quizType === 'boolean'){
+            boolean.style.display = 'block';
+            textType.style.display = 'none'; 
+            mcqType.style.display = 'none';
+        }
+        else{
+            textType.style.display = 'block';
+            mcqType.style.display = 'none';
+            boolean.style.display = 'none';
+        }
+}
+
+  </script>
+
+</body>
+</html>
+   

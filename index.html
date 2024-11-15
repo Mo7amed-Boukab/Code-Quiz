@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+    <title>Quiz App - Accueil</title>
+</head>
+<body>
+
+<header>
+    <div class="container-nav">
+        <div class="logo">Code <span>Quiz</span></div>
+        <div class="navbar-menu">
+            <a href="#home">Accueil</a> 
+            <a href="#about">A propos</a>
+            <a href="quiz.html">Quizzes</a>
+        </div>
+        <button class="navbar-button">Dashboard</button>
+    </div>
+
+</header>
+
+<section class="hero">
+ <div class="container-hero">
+    <a href="#quiz" class="hero-button" >Découvrez Nos Quizzes</a>
+ </div> 
+</section>
+
+<!-- -------------- page 2 quiz list ---------------- -->
+
+<section class="quiz-homePage" id="quiz">
+ 
+    <div class="titre">
+        <p>Défiez Votre Esprit : Sélectionnez un Quiz et Relevez le Défi </p>  
+    </div>
+
+    <!-- ------------------- list cards -------------------- -->
+     <div class="quiz-home-container">
+        <div class="quiz-card" >
+            <img src="/images/html.jpeg" alt="">
+            <h3>Quiz HTML</h3>
+            <p>5 questions - 30 seconde</p>
+            <p class="level">Difficulté : <span id="facile">Facile</span></p>
+            <button class="startBtn" data-category="htmlQuiz">Commencer</button>
+        </div>
+        <div class="quiz-card">
+            <img src="/images/css.jpeg" alt="">
+            <h3>Quiz CSS</h3>
+            <p>5 questions - 30 seconde</p> 
+            <p class="level">Difficulté : <span id="moyenne">Moyenne</span></p>
+            <button class="startBtn"  data-category="cssQuiz">Commencer</button>
+        </div>
+        <div class="quiz-card">
+            <img src="/images/js.jpeg" alt="">
+            <h3>Quiz JavaScript</h3>
+            <p>5 questions - 30 seconde</p>
+           <p class="level">Difficulté : <span id="dificile"> Difficile</span></p>
+           <button class="startBtn" data-category="jsQuiz">Commencer</button>
+        </div>
+     </div>
+   
+
+
+ 
+</section>
+
+
+
+ <!----------------------------------------------- Footer Section -->
+ <footer>
+    <div class="footer-container">
+        <div class="part-1">
+            <h5>Code <span>Quiz</span></h5>
+            <button id="dashboard">Dashboard</button>
+        </div>
+        <!-- ------------------------------------------------ -->
+        <div class="part-2">
+                <div class="sub-nav">
+                    <a href="#">Home</a>
+                    <a href="#">Quiz</a>
+                    <a href="#">Dashboard</a>    
+                </div>
+
+                <div class="social-icons">
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.x.com"><i class="fa-solid fa-x"></i></a>
+                    <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+                
+        </div>
+    <!-- ------------------------------------------------------- -->
+</div>
+</footer>
+<script src="quiz.js"></script>
+<script>
+    var dashboard = document.querySelector('.navbar-button');
+    dashboard.addEventListener('click', ()=>{
+    window.location.href = 'dashboard.html';
+  })
+  
+  let quizCartContainer = document.querySelector('.quiz-home-container')
+  let newCardsQuiz = JSON.parse(localStorage.getItem('newCardsQuiz'));
+         
+         for (let card in newCardsQuiz) {
+         let info = newCardsQuiz[card];
+         
+         let newCard = document.createElement('div');
+         newCard.classList.add('quiz-card');
+         
+         newCard.innerHTML = `
+             <img src="/images/img.png" alt="">
+             <h3>${info.title}</h3>
+             <p>${info.questionsCount} questions - ${info.duration} secondes</p>
+             <p class="level">Difficulté : <span id="${info.difficulty}">${info.difficulty}</span></p>
+             <button class="startBtn" data-category="${info.category}">Commencer</button>
+         `;
+         quizCartContainer.appendChild(newCard);
+     
+         }
+
+</script>
+</body>
+</html>
