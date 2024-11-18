@@ -43,27 +43,25 @@
             <img src="/images/html.jpeg" alt="">
             <h3>Quiz HTML</h3>
             <p>5 questions - 30 seconde</p>
-            <p class="level">Difficulté : <span id="facile">Facile</span></p>
-            <button class="startBtn" data-category="htmlQuiz">Commencer</button>
+            <p class="level">Difficulté : <span id="Facile">Facile</span></p>
+            <button class="startBtn">Commencer</button>
         </div>
         <div class="quiz-card">
             <img src="/images/css.jpeg" alt="">
             <h3>Quiz CSS</h3>
             <p>5 questions - 30 seconde</p> 
-            <p class="level">Difficulté : <span id="moyenne">Moyenne</span></p>
-            <button class="startBtn"  data-category="cssQuiz">Commencer</button>
+            <p class="level">Difficulté : <span id="Moyenne">Moyenne</span></p>
+            <button class="startBtn">Commencer</button>
         </div>
         <div class="quiz-card">
             <img src="/images/js.jpeg" alt="">
             <h3>Quiz JavaScript</h3>
             <p>5 questions - 30 seconde</p>
-           <p class="level">Difficulté : <span id="dificile"> Difficile</span></p>
-           <button class="startBtn" data-category="jsQuiz">Commencer</button>
+           <p class="level">Difficulté : <span id="Difficile"> Difficile</span></p>
+           <button class="startBtn">Commencer</button>
         </div>
      </div>
    
-
-
  
 </section>
 
@@ -95,33 +93,7 @@
     <!-- ------------------------------------------------------- -->
 </div>
 </footer>
-<script src="quiz.js"></script>
-<script>
-    var dashboard = document.querySelector('.navbar-button');
-    dashboard.addEventListener('click', ()=>{
-    window.location.href = 'dashboard.html';
-  })
-  
-  let quizCartContainer = document.querySelector('.quiz-home-container')
-  let newCardsQuiz = JSON.parse(localStorage.getItem('newCardsQuiz'));
-         
-         for (let card in newCardsQuiz) {
-         let info = newCardsQuiz[card];
-         
-         let newCard = document.createElement('div');
-         newCard.classList.add('quiz-card');
-         
-         newCard.innerHTML = `
-             <img src="/images/img.png" alt="">
-             <h3>${info.title}</h3>
-             <p>${info.questionsCount} questions - ${info.duration} secondes</p>
-             <p class="level">Difficulté : <span id="${info.difficulty}">${info.difficulty}</span></p>
-             <button class="startBtn" data-category="${info.category}">Commencer</button>
-         `;
-         quizCartContainer.appendChild(newCard);
-     
-         }
-
-</script>
+<!-- <script src="data.js"></script> -->
+<script src="index.js"></script>
 </body>
 </html>
