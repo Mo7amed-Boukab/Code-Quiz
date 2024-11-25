@@ -51,9 +51,9 @@ home.addEventListener('click', ()=>{
 window.location.href = 'index.html';
 })
 
-let CardsInfo = JSON.parse(localStorage.getItem('CardsInfo'));
+let GetCardsInfo = JSON.parse(localStorage.getItem('CardsInfo'));
 // ---------------------------------------- show quiz cards in dashboard
-CardsInfo.forEach((card) => {
+GetCardsInfo.forEach((card) => {
     let newCard = document.createElement('div');
         newCard.classList.add('quiz-card');
         newCard.innerHTML = `
@@ -82,9 +82,9 @@ let buttonAddQuiz = document.getElementById('addQuizBtn');
             category: quizCategory
         };
 
-    CardsInfo.push(newCardQuiz);
-    console.log(CardsInfo);
-    localStorage.setItem('CardsInfo', JSON.stringify(CardsInfo));
+    GetCardsInfo.push(newCardQuiz);
+    console.log(GetCardsInfo);
+    localStorage.setItem('CardsInfo', JSON.stringify(GetCardsInfo));
     addQuizForm.style.display = 'none';
     dashboardMainContainer.style.alignItems = 'center';
     displayBoxModul.style.display = 'block';
@@ -95,8 +95,8 @@ var Quiz = document.querySelectorAll('.deleteQuiz');
 
 for (let i = 0; i < Quiz.length; i++) {
     Quiz[i].addEventListener('click', () => {
-        CardsInfo.splice(i, 1);
-        localStorage.setItem("CardsInfo", JSON.stringify(CardsInfo));
+      GetCardsInfo.splice(i, 1);
+        localStorage.setItem("CardsInfo", JSON.stringify(GetCardsInfo));
         Quiz[i].closest('.quiz-card').remove();
     });
 }
@@ -135,15 +135,13 @@ function ChoiceQuestionType() {
 }
 var newArray=[];
 function addQuestion() {
-    let quizData = JSON.parse(localStorage.getItem('quizData'));  
+   let GetQuizData = JSON.parse(localStorage.getItem('quizData'));
 if (currentQuestion < totalQuestions) {
     let quizType = document.getElementById('quizType').value;
     let questionText = document.getElementById('questionText').value;
     let correctAnswer = document.getElementById('correctAnswer').value;
     let explanation = document.getElementById('explanation').value;
     let newQuestion;
-   
-
   
     if (quizType === 'mcq') {
       let options = [
@@ -188,10 +186,8 @@ if (currentQuestion < totalQuestions) {
     clearForm();
 } 
 else {
-    quizData.push(newArray);
-    console.log(quizData)
-    localStorage.setItem('quizData', JSON.stringify(quizData));
-    alert("Toutes les questions sont ajoutées .. Merci !!");
+  GetQuizData.push(newArray);
+    localStorage.setItem('quizData', JSON.stringify(GetQuizData));
 }
 
 }

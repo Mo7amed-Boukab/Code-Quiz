@@ -1,207 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <aside class="sidebar">
+        <div
+          class="logo"
+          style="margin-left: 24px; margin-top: 55px; font-size: 2.5rem">
+          Code <span style="color: #669bbc">Quiz</span>
+        </div>
 
-</head>
-<body>
-  <div class="dashboard">
-    <aside class="sidebar">
+        <ul class="menu">
+          <li id="statistiqueBtn">
+            <i class="fa-solid fa-chart-line"></i> Statistiques
+          </li>
+          <li id="voirQuiz"><i class="fa-solid fa-list"></i> Voir les Quiz</li>
+          <li id="AddQuiz">
+            <i class="fa-solid fa-plus-circle"></i> Ajouter un Quiz
+          </li>
+          <li id="home">
+            <i class="fa-solid fa-sign-out-alt"></i> Déconnexion
+          </li>
+        </ul>
+      </aside>
 
-    <div class="logo" style="margin-left: 24px; margin-top:55px; font-size: 2.5rem;">Code <span style="color: #669bbc;">Quiz</span></div>
-
-    <ul class="menu">
-      <li id="statistiqueBtn"><i class="fa-solid fa-chart-line"></i> Statistiques</li>
-      <li id="voirQuiz"><i class="fa-solid fa-list"></i> Voir les Quiz</li>
-      <li id="AddQuiz"><i class="fa-solid fa-plus-circle"></i> Ajouter un Quiz</li>
-      <li id="home"><i class="fa-solid fa-sign-out-alt"></i> Déconnexion</li>
-    </ul>
-    </aside>
-
-    <!-- Contenu principal -->
-     <div class="main">
+      <!-- Contenu principal -->
+      <div class="main">
         <div class="title">
-            <h1>Tableau de Bord</h1>
+          <h1>Tableau de Bord</h1>
         </div>
 
         <main id="content-contrainer">
-     
-            <!-- ---------------------------------------- form quiz card to add -->
-                <!-- <form id="addQuizForm"> -->
-                    <div class="addQuiz-form">
-                        <div class="input-container">
-                        <label for="quiz-Title">Titre de Quiz</label>
-                        <input type="text" id="quiz-Title"  placeholder="Entrez le titre du quiz"  required>
-                        </div>
-                        
-                        <div class="input-container">
-                        <label for="quizDifficulty">Difficulté</label>
-                        <input type="text" id="quizDifficulty"  placeholder="Facile, Moyenne, Difficile" required>
-                        </div>
-                        
-                        <div class="input-container">
-                        <label for="quizQuestions">Nombre de Questions</label>
-                        <input type="number" id="quizQuestions" placeholder="Entrez le nombre de questions" required>
-                        </div>
-                        
-                        <div class="input-container">
-                        <label for="quizDuration">Durée</label>
-                        <input type="number" id="quizDuration" placeholder="Durée en secondes" required>
-                        </div>
-            
-                        <div class="input-container">
-                        <label for="quizCategory">Catégorie</label>
-                        <input type="text" id="quizCategory" placeholder="Entrez la catégorie" required>
-                        </div>
-             
-                        <div class="button">
-                        <button type="submit" id="addQuizBtn">Ajouter le Quiz</button>
-                        </div>
-                    
-                    </div>
-                    <!-- -------------------- Box model to add question -->
-                    <div class="endQuizBoxModul" id="displayBoxModul">
-                        <h2>Le Quiz est ajouté avec succès !</h2>
-                        <input type="number" placeholder="Entrer le nombre des questions  " id="inputNbrQuestions" style="width: 60%;padding: 10px 12px; margin: 10px;">
-                        <div class="button">
-                          <button onclick="PassToAddQuestion()">Ajouter les Questions</button>
-                        </div>
-                    </div>
+          <!-- ---------------------------------------- form quiz card to add -->
+          <!-- <form id="addQuizForm"> -->
+          <div class="addQuiz-form">
+            <div class="input-container">
+              <label for="quiz-Title">Titre de Quiz</label>
+              <input
+                type="text"
+                id="quiz-Title"
+                placeholder="Entrez le titre du quiz"
+                required />
+            </div>
 
-                <!-- </form> -->
-                 <!-- --------------------------------------- From questions -->
-        <div class="quiz-form-container" id="questionsForm">
-                <div class="input-container">
-                    <label for="questionText">Question:</label>
-                    <input type="text" id="questionText" placeholder="Entrez la question">
+            <div class="input-container">
+              <label for="quizDifficulty">Difficulté</label>
+              <input
+                type="text"
+                id="quizDifficulty"
+                placeholder="Facile, Moyenne, Difficile"
+                required />
+            </div>
+
+            <div class="input-container">
+              <label for="quizQuestions">Nombre de Questions</label>
+              <input
+                type="number"
+                id="quizQuestions"
+                placeholder="Entrez le nombre de questions"
+                required />
+            </div>
+
+            <div class="input-container">
+              <label for="quizDuration">Durée</label>
+              <input
+                type="number"
+                id="quizDuration"
+                placeholder="Durée en secondes"
+                required />
+            </div>
+
+            <div class="input-container">
+              <label for="quizCategory">Catégorie</label>
+              <input
+                type="text"
+                id="quizCategory"
+                placeholder="Entrez la catégorie"
+                required />
+            </div>
+
+            <div class="button">
+              <button type="submit" id="addQuizBtn">Ajouter le Quiz</button>
+            </div>
+          </div>
+          <!-- -------------------- Box model to add question -->
+          <div class="endQuizBoxModul" id="displayBoxModul">
+            <h2>Le Quiz est ajouté avec succès !</h2>
+            <input
+              type="number"
+              placeholder="Entrer le nombre des questions  "
+              id="inputNbrQuestions"
+              style="width: 60%; padding: 10px 12px; margin: 10px" />
+            <div class="button">
+              <button onclick="PassToAddQuestion()">
+                Ajouter les Questions
+              </button>
+            </div>
+          </div>
+
+          <!-- </form> -->
+          <!-- --------------------------------------- From questions -->
+          <div class="quiz-form-container" id="questionsForm">
+            <div class="input-container">
+              <label for="questionText">Question:</label>
+              <input
+                type="text"
+                id="questionText"
+                placeholder="Entrez la question" />
+            </div>
+
+            <div class="input-container">
+              <label for="quizType">Type de Question:</label>
+              <select id="quizType" onchange="ChoiceQuestionType()">
+                <option value="mcq">Choix Multiple</option>
+                <option value="boolean">Vrai / Faux</option>
+                <option value="text">Texte</option>
+              </select>
+            </div>
+
+            <div class="input-container">
+              <div id="mcqOptions">
+                <label>Options:</label>
+                <input type="text" id="option1" placeholder="Option 1" />
+                <input type="text" id="option2" placeholder="Option 2" />
+                <input type="text" id="option3" placeholder="Option 3" />
+                <input type="text" id="option4" placeholder="Option 4" />
+                <div>
+                  <label>Réponse correcte:</label>
+                  <input
+                    type="text"
+                    placeholder="Entrez indice de bonne réponse"
+                    id="correctAnswer" />
                 </div>
+              </div>
 
-                <div class="input-container">
-                    <label for="quizType">Type de Question:</label>
-                    <select id="quizType" onchange="ChoiceQuestionType()">
-                      <option  value="mcq">Choix Multiple</option>
-                      <option  value="boolean">Vrai / Faux</option>
-                      <option  value="text">Texte</option>
-                    </select>
-                </div>
+              <div id="booleanOptions" style="display: none">
+                <label>Réponse correcte:</label>
+                <select id="booleanAnswer">
+                  <option value="vrai">Vrai</option>
+                  <option value="faux">Faux</option>
+                </select>
+              </div>
 
-                <div class="input-container">
+              <div id="textAnswer" style="display: none">
+                <label>Réponse correcte:</label>
+                <input
+                  type="text"
+                  id="correctTextAnswer"
+                  placeholder="Entrez la réponse correcte"
+                  id="correctAnswer" />
+              </div>
+            </div>
 
-                    <div id="mcqOptions">
-                    <label>Options:</label>
-                    <input type="text" id="option1" placeholder="Option 1">
-                    <input type="text" id="option2" placeholder="Option 2">
-                    <input type="text" id="option3" placeholder="Option 3">
-                    <input type="text" id="option4" placeholder="Option 4">
-                    <div>
-                        <label>Réponse correcte:</label>
-                        <input type="text"  placeholder="Entrez indice de bonne réponse" id="correctAnswer">
-                    </div>
-                    </div>
+            <div class="input-container">
+              <label for="explanation">Explication:</label>
+              <input
+                type="text"
+                id="explanation"
+                placeholder="Explication de la réponse" />
+            </div>
 
-                    <div id="booleanOptions" style="display: none;">
-                        <label>Réponse correcte:</label>
-                        <select id="booleanAnswer">
-                          <option value="vrai">Vrai</option>
-                          <option value="faux">Faux</option>
-                        </select>
-                      </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+              ">
+              <button onclick="addQuestion()" id="addQuestionBtn">
+                Ajouter la Question
+              </button>
+              <p id="progressMessage" style="color: gray"></p>
+            </div>
+          </div>
 
-                    <div id="textAnswer" style="display: none;" >
-                        <label>Réponse correcte:</label>
-                        <input type="text" id="correctTextAnswer" placeholder="Entrez la réponse correcte" id="correctAnswer">
-                    </div>
-                </div>
+          <section class="statistiques" id="displayStatistique">
+            <div class="stat-card">
+              <p>Nombre total de participants</p>
+              <h3>7</h3>
+              <span class="stat-change positive">+5%</span>
+            </div>
+            <div class="stat-card">
+              <p>Score moyen</p>
+              <h3>75%</h3>
+              <span class="stat-change negative">-2%</span>
+            </div>
+            <div class="stat-card">
+              <p>Temps moyen</p>
+              <h3>1:30</h3>
+            </div>
+          </section>
 
-                <div class="input-container">
-                    <label for="explanation">Explication:</label>
-                    <input type="text" id="explanation" placeholder="Explication de la réponse">
-                </div>
+          <section class="quiz-management" id="displayQuizManagement">
+            <h2>Gestion des Quiz</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nom du Quiz</th>
+                  <th>Questions</th>
+                  <th>Participants</th>
+                  <th>Taux de réussite</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>HTML</td>
+                  <td>5</td>
+                  <td>4</td>
+                  <td>90%</td>
+                  <td>
+                    <button class="btn delete-btn">Supprimer</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>CSS</td>
+                  <td>5</td>
+                  <td>2</td>
+                  <td>75%</td>
+                  <td>
+                    <button class="btn delete-btn">Supprimer</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>JavaScript</td>
+                  <td>5</td>
+                  <td>1</td>
+                  <td>50%</td>
+                  <td>
+                    <button class="btn delete-btn">Supprimer</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <div class="main-container"></div>
+        </main>
+      </div>
+    </div>
 
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                    <button onclick="addQuestion()" id="addQuestionBtn">Ajouter la Question</button>
-                    <p id="progressMessage" style="color: gray;"></p>
-                </div>
-               
-                  
-                
-        </div>
-            
-                
-                            <section class="statistiques" id="displayStatistique">
-                            <div class="stat-card">
-                                <p>Nombre total de participants</p>
-                                <h3>7</h3>
-                                <span class="stat-change positive">+5%</span>
-                            </div>
-                            <div class="stat-card">
-                                <p>Score moyen</p>
-                                <h3>75%</h3>
-                                <span class="stat-change negative">-2%</span>
-                            </div>
-                            <div class="stat-card">
-                                <p>Temps moyen</p>
-                                <h3>1:30</h3>
-                            </div>
-                            </section>
-                
-                            <section class="quiz-management" id="displayQuizManagement">
-                            <h2>Gestion des Quiz</h2>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Nom du Quiz</th>
-                                    <th>Questions</th>
-                                    <th>Participants</th>
-                                    <th>Taux de réussite</th>   
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>HTML</td>
-                                    <td>5</td>
-                                    <td>4</td>
-                                    <td>90%</td>
-                                    <td>
-                                    <button class="btn delete-btn">Supprimer</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>CSS</td>
-                                    <td>5</td>
-                                    <td>2</td>
-                                    <td>75%</td>
-                                    <td>
-                                    <button class="btn delete-btn">Supprimer</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>JavaScript</td>
-                                    <td>5</td>
-                                    <td>1</td>
-                                    <td>50%</td>
-                                    <td>
-                                    <button class="btn delete-btn">Supprimer</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            </section>
-                            <div class="main-container">
-                            </div>
-            
-                </main>
-     </div>
-   
-  </div>
-
-  <script src="dashbord.js"></script>
-
-</body>
+    <script src="dashbord.js"></script>
+  </body>
 </html>
-   

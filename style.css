@@ -821,3 +821,13 @@ footer{
     border: 1px solid var(--main-color);
     margin-top: 5px;
 }
+#timerBox{
+  height: 30px;
+  text-align: center;
+  color: #1b263b;
+}
+#timer{
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+}

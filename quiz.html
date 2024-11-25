@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Start - Quiz</title>
 </head>
 <body>
 
         <header class="quizHeader">
           <div class="eleHeader"><i class="fa-solid fa-stopwatch" style="font-size: 1.5rem;"></i>&nbsp;<span id="delai">00 : 30</span></div>
-          <div class="eleHeader">Q <span id="QuestionNbr">1 </span>/ 5</div>
+          <div class="eleHeader"><span id="QuestionNbr"></span></div>
           <div class="eleHeader">score :<span id="score"> 0 </span>points</div>
           
         </header>
@@ -26,13 +26,19 @@
             <div class="endQuizBoxModul">
                 <h2>Résultats du Quiz</h2>
                 <p>Score final : <span id="afficheScore"></span></p>
+                <p>Réponses correctes : <span id="correctResponce">0</span></p>
+                <p>Réponses incorrectes : <span id="incorrectResponce">0</span></p>
+
+
                 <div class="button">
                   <button onclick="restartQuiz()">Recommencer</button>
                   <button onclick="backHome()">Retour à l'accueil</button>
                 </div>
             </div>
               <div class="quizBox">
-                
+                <div id="timerBox">
+                <span id="timer">5</span>
+                </div> 
                   <div class="exp"></div>
                   <div><h1  id="quizTitle"></h1></div>
                    <!-- ----------------------------- -->

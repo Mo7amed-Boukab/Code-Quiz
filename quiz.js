@@ -11,59 +11,63 @@ let explanation = document.querySelector(".exp");
 let progressCount = document.querySelector(".progressCount");
 // ---------------------------------------------------- 
 let questionsCount = 0;
-let totalQuestions = 4;
+let totalQuestions;
 // ---------------------------------------------------- Question Number Header (variable)
 let QuestionNbr = document.getElementById('QuestionNbr');
 let currentQuestionNbr = 1; 
 // ---------------------------------------------------- Score Header (variable)
 let score = document.getElementById("score");
-let scoreValue = 0
+let scoreValue = 0;
+let totalScore = 0;
+//------------------------------------------------------ Show User Responces
+let correctResponce = document.getElementById("correctResponce");
+let incorrectResponce = document.getElementById("incorrectResponce");
+let correctResponceCount = 0;
+let incorrectResponceCount = 0;
+let countNotification = 0;
 // ---------------------------------------------------- end quiz result
 let endQuiz = document.querySelector('.endQuizBoxModul');
 let afficheScore = document.getElementById('afficheScore');
 
-
 let quizChosen = JSON.parse(localStorage.getItem("quizchosen"));
-newQuestionData(quizChosen[questionsCount]);
-
+newQuizData(quizChosen[questionsCount], quizChosen.length);
+totalQuestions = quizChosen.length;
  //============================================ function quiz 
 
-function newQuestionData(quiz){
+function newQuizData(quiz, length){
   
   let mcqType = document.getElementById("mcq");
   let boolType = document.getElementById("boolean");
   let textType = document.getElementById("text");
   let quizTitle = document.getElementById("quizTitle");
 
-  quizTitle.textContent = quiz.question ; 
+  QuestionNbr.innerHTML = `Q ${currentQuestionNbr} / ${length}`;
+  quizTitle.textContent = quiz.question ;
+
   mcqType.style.display = 'none';
   boolType.style.display = 'none';
   textType.style.display = 'none'; 
   endQuiz.style.display = 'none';
-
+  startTimer();
     // -----------------------------------------------
-    
      if(quiz.type ==='mcq') {
-       
+
+          mcqType.style.display = 'block';
           options.forEach((op , index) => {
             op.textContent = quiz.options[index];
-            var optionIndex = index;
-     
-            mcqType.style.display = 'block';
-           
-          // -------------------------- Event click to verify correct/false answer , add colors , disable other options and update score
+            var optionIndex = index;   
+          // ------------------------------------------
                 op.addEventListener("click", () => {
-                 
                   if(optionIndex === quiz.correctAnswer){
                     op.style.backgroundColor = '#38b000';
-                    scoreValue += 10; 
+                    scoreValue = 10; 
+                    countNotification = 1;
                   }
                   else{
                     op.style.backgroundColor = 'red';
                     explanation.style.display = 'block';
                     explanation.textContent = quiz.explanation;
                   }
-                  updateScore();
                   disableOptions();
                 }) 
            })         
@@ -79,14 +83,14 @@ function newQuestionData(quiz){
             op.addEventListener("click", () => {
               if(op.textContent == correctAnswer){
                 op.style.backgroundColor = '#38b000';
-                scoreValue += 10; 
+                scoreValue = 10;
+                countNotification = 1;
               }
               else{
                op.style.backgroundColor = 'red';  
                 explanation.style.display = 'block';
                 explanation.textContent = quiz.explanation;
               }
-              updateScore();
               disableOptions();
             }) 
 
@@ -101,7 +105,8 @@ function newQuestionData(quiz){
               var userAnswer = e.target.value.trim();
               if (userAnswer === correctAnswer) {
                   input.style.backgroundColor = '#38b000'; 
-                  scoreValue += 10;
+                  scoreValue = 10;
+                  countNotification = 1;
                   explanation.style.display = 'none'; 
                   input.disabled = true;
                   explanation.style.display = 'block';
@@ -109,26 +114,10 @@ function newQuestionData(quiz){
                   input.style.backgroundColor = 'red'; 
                   explanation.textContent = quiz.explanation;
               }
-              updateScore();
+              
           });     
-      }  
-      afficheScore.textContent = ` ${scoreValue}`;
-}
-function next() {
-  if (questionsCount < totalQuestions ) { 
-    questionsCount++;
-    currentQuestionNbr++;
-    QuestionNbr.textContent = `${currentQuestionNbr}`;
-    progressCount.style.width = `calc(${(questionsCount / totalQuestions) * 100}%)`;  
-    resetOptions();
-    newQuestionData(quizChosen[questionsCount]); 
-  } else {
-    afficherResultat();
-  }
-}
-
-function updateScore() {
-  score.textContent = ` ${scoreValue} `;
+      } 
+      
 }
 function disableOptions() {
   // ----------------------------------------------- multip choices
@@ -141,50 +130,90 @@ function disableOptions() {
      input.disabled = true;
    }
  }
- // -------------------------------------- timer
+function next() {
+  clearInterval(timer2Interval); 
+  if (questionsCount < (totalQuestions - 1)) {
+    questionsCount++;
+    currentQuestionNbr++;
+    QuestionNbr.innerHTML = `Q ${currentQuestionNbr} / ${totalQuestions}`;
+    updateScore();
+    // ------------------------------------------
+    progressCount.style.width = `calc(${(questionsCount / (totalQuestions - 1)) * 100}%)`;  
+    //-------------------------------------------
+    resetOptions();
+    newQuizData(quizChosen[questionsCount], quizChosen.length);
+  } else {
+    updateScore();
+    afficherResultat();
+  }
+}
 
-  var counter =   30; 
-  var timer = document.getElementById('delai');
+function updateScore() {
+  totalScore += scoreValue; 
+  score.textContent = ` ${totalScore} `; 
+  afficheScore.textContent = score.textContent;
+  scoreValue = 0;
 
-  var countInterval = setInterval(function() {
+  if (countNotification == 1) {
+    correctResponceCount += 1;
+    correctResponce.textContent = ` ${correctResponceCount} `; 
+  }
+  else{
+    incorrectResponceCount += 1;
+    incorrectResponce.textContent = ` ${incorrectResponceCount} `; 
+  }
+  countNotification = 0;
+}
 
-      timer.innerHTML =  ` 00 : ${counter} `;
+ // -------------------------------------- timers
+
+let counter1 = 30; 
+let timer1 = document.getElementById('delai');
+let timer1Interval = setInterval(function() {
       
-      counter--;
+     timer1.innerHTML =  ` 00 : ${counter1} `;
+     
+     counter1--;
 
-      if (counter < 0) { 
-          clearInterval(countInterval);
-          timer.innerHTML = "00 : 00"; 
-      }
-  }, 1000);
+     if (counter1 < 0) { 
+         clearInterval(timer1Interval);
+         timer1.innerHTML = "00 : 00"; 
+     }
+ }, 1000);
+
+
+let timer2 = document.getElementById('timer'); 
+let timerInterval; 
+ 
+function startTimer() {
+  let counter2 = 5;
+  timer2Interval = setInterval(function () {
+     timer2.innerHTML = `${counter2}`; 
+
+     counter2--; 
+
+     if (counter2 < 0) { 
+      clearInterval(timer2Interval);
+      timer1.innerHTML = "0"; 
+      next(); 
+    }
+  }, 1000);    
+ }
 
 // --------------------------------------
 function afficherResultat() {
   quizBox.style.display = 'none';
   endQuiz.style.display = 'block';
-  afficheScore.textContent = ` ${scoreValue} `;
 }
 function backHome(){
   window.location.href = 'index.html';
 }
 function restartQuiz() {
-  currentQuestionNbr = 1;
-  questionsCount = 0;
-  scoreValue = 0;
-
-  QuestionNbr.textContent = ` ${currentQuestionNbr} `;
-  progressCount.style.width = '0%';
-  updateScore();
-  endQuiz.style.display = 'none';
-  quizBox.style.display = 'block';
-
-  resetOptions();
-  counter = 30;
-  timer.innerHTML =  ` 00 : ${counter} `;
-
+  window.location.reload();
 }
 
 function resetOptions() {
+  scoreValue = 0;
   options.forEach(op => {
     op.style.backgroundColor = '#fff'; 
     op.disabled = false;             
